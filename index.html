@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marvel App</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="img/captain-america.png">
+</head>
+<body>
+    <header>
+        <div class="header" id="header">
+            <div class="header-blackout">
+                <div class="top-header">
+                    <div class="top-header-div-3">
+                        <a href="#header"><img onclick="reloadBtn()" src="img/marvel.png" alt="marvel"></a>
+                    </div>
+
+                    <div class="top-header-div-2">
+                        <ul>
+                            <li><a href="#movies" class="redHover">Movies</a></li>
+                            <li><a href="#characters" class="redHover">Characters</a></li>
+                            <!-- <li><a href="" class="redHover">TV Shows</a></li>
+                            <li><a href="" class="redHover">About</a></li>
+                            <li><a href="" class="redHover">Contacts</a></li> -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="bottom-header">
+                    <div class="bottom-header-inline">
+                        <div class="header-inline-1">
+                            <p>The Marvel Cinematic Universe (MCU) is an American media franchise and shared universe centered on a series of superhero films produced by Marvel Studios. The films are based on characters that appear in American comic books published by Marvel Comics. The franchise also includes television series, short films, digital series, and literature. The shared universe, much like the original Marvel Universe in comic books, was established by crossing over common plot elements, settings, cast, and characters.</p>
+                        </div>
+                        <div class="header-inline-2">
+
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="movies" id="movies">
+            <div class="title" style="margin-top: 0; padding-top: 1rem;">
+                <h1>MOVIES</h1>
+            </div>
+            <div class="movies-sort-block">
+                <div>
+                    <h3>
+                        Sort by:
+                        <form>
+                            <select name="sortMovie" id="sortMovie" class="sortMovie" size="3">
+                                <option class="option" value="byOrder">Timeline</option>
+                                <option class="option" value="byYear">Release year</option>
+                                <option value="byRtScore">RT Score</option>
+                            </select>
+                        </form>
+                    </h3>
+                    <h5 style="color: rgb(170, 170, 170); margin-bottom: 0;">// RT Score = Rotten Tomatoes Score</h5>
+                </div>
+            </div>
+            <div class="movies-container">
+                <h2 style="text-align: center;">Loading....</h2>
+            </div>
+        </div>
+
+        <div class="characters" id="characters">
+            <div class="title">
+                <h1>Characters</h1>
+            </div>
+            <div class="search-div">
+                <input type="text" placeholder="Search..." class="searchInput">
+            </div>
+            <div class="container">
+                <h2 style="text-align: center; color: white;">Loading....</h2>
+            </div>
+            <div class="pagination">
+                <div class="pagination-block">
+                    <button class="prevBtn"><</button>
+                    <span class="page">1</span>
+                    <button class="nextBtn">></button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
