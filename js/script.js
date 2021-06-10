@@ -3,6 +3,15 @@ const API_KEY = '71466addaeeea6cdbb33b9eb4f46c041';
 const LIMIT = 12;
 const $container = document.querySelector('.container');
 const $searchInput = document.querySelector('.searchInput');
+const $prevBtn = document.querySelector('.prevBtn');
+const $nextBtn = document.querySelector('.nextBtn');
+const $page = document.querySelector('.page');
+const TOTAL_CHARACTERS = 1493;
+const TOTAL_PAGES = Math.floor(TOTAL_CHARACTERS / LIMIT);
+const $totalPagesSpan = document.querySelector('.total-pages-span');
+let pageCounter = 1;
+let offsetCounter = 0;
+
 
 function getRequest(offset = 0, searchstring = '', cb){
     const baseURL = `http://gateway.marvel.com/v1/public/characters?ts=1&apikey=${API_KEY}&hash=${HAST_KEY}&offset=${offset}&limit=${LIMIT}${!searchstring ? null : `&nameStartsWith=${searchstring}`}`;
@@ -361,6 +370,13 @@ $searchInput.addEventListener('input', e => {
             res => {
                 const temp = res.results.map(item => cardsTemplate(item)).join('');
                 $container.innerHTML = temp;
+                $prevBtn.removeAttribute('disabled');
+                $prevBtn.classList.remove('disabled');
+                $nextBtn.removeAttribute('disabled');
+                $nextBtn.classList.remove('disabled');
+                $totalPagesSpan.innerHTML = `/ ${TOTAL_PAGES}`;
+                pageCounter = 1;
+                $page.innerHTML = pageCounter;
             }
         )
     }else{
@@ -370,11 +386,108 @@ $searchInput.addEventListener('input', e => {
             res => {
                 if(res.results.length == 0){
                     $container.innerHTML = '<h1 style="text-align: center; color:white; box-shadow: 0px 0px 5px white; padding: 1rem 2rem; border-radius: 10px;">Nothing found 404</h1>'
+                    $prevBtn.setAttribute('disabled', true);
+                    $prevBtn.classList.add('disabled');
+                    $nextBtn.setAttribute('disabled', true);
+                    $nextBtn.classList.add('disabled');
+                    $totalPagesSpan.innerHTML = ' / &nbsp; 1 ';
+                    pageCounter = 1;
+                    $page.innerHTML = pageCounter;
                 }else{
                     const temp = res.results.map(item => cardsTemplate(item)).join('');
                     $container.innerHTML = temp;    
+                    $prevBtn.setAttribute('disabled', true);
+                    $prevBtn.classList.add('disabled');
+                    $nextBtn.setAttribute('disabled', true);
+                    $nextBtn.classList.add('disabled');
+                    $totalPagesSpan.innerHTML = ' / &nbsp; 1 ';
+                    pageCounter = 1;
+                    $page.innerHTML = pageCounter;
                 }
             }
         )
+    }
+})
+
+
+// Pagination
+
+window.addEventListener('load', () => {
+    $page.innerHTML = '1';
+    $prevBtn.setAttribute('disabled', true);
+    $prevBtn.classList.add('disabled');
+    $nextBtn.removeAttribute('disabled');
+    $nextBtn.classList.remove('disabled');
+    $totalPagesSpan.innerHTML = `/ ${TOTAL_PAGES}`;
+})
+
+$nextBtn.addEventListener('click', e => {
+    e.preventDefault();
+
+    $prevBtn.removeAttribute('disabled');
+    $prevBtn.classList.remove('disabled');
+    if(pageCounter >= 1 && pageCounter <= TOTAL_PAGES){
+        if(pageCounter == TOTAL_PAGES){
+            $nextBtn.setAttribute('disabled', true);
+            $nextBtn.classList.add('disabled');
+            getRequest(
+                (offsetCounter += LIMIT),
+                '',
+                res => {
+                    pageCounter++;
+                    $page.innerHTML = pageCounter;
+                    const temp = res.results.map(item => cardsTemplate(item)).join('');
+                    $container.innerHTML = temp
+                }
+            )
+        }else{
+            getRequest(
+                (offsetCounter += LIMIT),
+                '',
+                res => {
+                    pageCounter++;
+                    $page.innerHTML = pageCounter;
+                    const temp = res.results.map(item => cardsTemplate(item)).join('');
+                    $container.innerHTML = temp
+                }
+            )
+        }
+    }
+})
+
+$prevBtn.addEventListener('click', e => {
+    e.preventDefault();
+
+    if(pageCounter >= 1){
+        pageCounter--;
+        if(pageCounter == 1){
+            $prevBtn.setAttribute('disabled', true);
+            $prevBtn.classList.add('disabled');
+            $nextBtn.removeAttribute('disabled', true);
+            $nextBtn.classList.remove('disabled');
+            pageCounter = 1;
+            $page.innerHTML = pageCounter;
+            offsetCounter = 0;
+            getRequest(
+                offsetCounter,
+                '',
+                res => {
+                    const temp = res.results.map(item => cardsTemplate(item)).join('');
+                    $container.innerHTML = temp
+                }
+            )
+        }else{
+            getRequest(
+                (offsetCounter -= LIMIT),
+                '',
+                res => {
+                    $page.innerHTML = pageCounter;
+                    $nextBtn.removeAttribute('disabled', true);
+                    $nextBtn.classList.remove('disabled');
+                    const temp = res.results.map(item => cardsTemplate(item)).join('');
+                    $container.innerHTML = temp;
+                }
+            )
+        }
     }
 })

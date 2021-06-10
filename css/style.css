@@ -402,7 +402,7 @@ hr{
     margin-top: 2rem;
 }
 .pagination-block{
-    width: 170px;
+    width: 200px;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -430,4 +430,16 @@ hr{
     color: white;
     font-size: 20px;
     font-family: 'Poppins', sans-serif;
+}
+.pagination-block span{
+    color: white;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+.disabled{
+    opacity: 0.5;
+    cursor: unset;
+}
+.disabled:hover{
+    background-color: transparent;
 }
