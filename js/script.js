@@ -306,7 +306,7 @@ const $sortMovie = document.getElementById('sortMovie')
 $sortMovie.addEventListener('change', e => {
     if(e.target.value == 'byYear'){
         const base = JSON.parse(localStorage.getItem('base'));
-        let sortedBase = base.sort((a, b) => a.year - b.year);
+        let sortedBase = base.sort((a, b) => a.year - b.year);  
         localStorage.setItem('base', JSON.stringify(sortedBase));
         window.location.reload();
     }else if(e.target.value == 'byOrder'){
@@ -448,7 +448,7 @@ $nextBtn.addEventListener('click', e => {
                     pageCounter++;
                     $page.innerHTML = pageCounter;
                     const temp = res.results.map(item => cardsTemplate(item)).join('');
-                    $container.innerHTML = temp
+                    $container.innerHTML = temp 
                 }
             )
         }
