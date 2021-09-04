@@ -443,3 +443,114 @@ hr{
 .disabled:hover{
     background-color: transparent;
 }
+
+
+/* Adaptive layout */
+
+
+@media screen and (max-width: 1200px){
+    .header-inline-1 p {
+        font-size: 20px;
+    }
+    .movie-left {
+        width: 100%;
+        height: 90%;
+    }
+}
+@media screen and (max-width: 1000px){
+    .movie-left-parent{
+        width: 30%;
+    }
+    .movie-left{
+        width: 100%;
+    }
+}
+@media screen and (max-width: 900px){
+    .bottom-header-inline{
+        width: 85%;
+    }
+    .header-inline-1 p {
+        font-size: 18px;
+    }
+}
+@media screen and (max-width: 700px){
+    .title h1{
+        font-size: 35px;
+    }
+    .movies-sort-block h3{
+        font-size: 20px;
+    }
+    .sortMovie option{
+        font-size: 18px;
+    }
+    .movie-left-parent {
+        width: 50%;
+    }
+    .movie-right ul li {
+        font-size: 16px;
+        margin-bottom: 0.625rem;
+    }
+    .movie-left{
+        height: 100%;
+    }
+    .bottom-header-inline{
+        width: 90%;
+    }
+    .header-inline-1 p {
+        font-size: 16px;
+    }
+}
+@media screen and (max-width: 500px) {
+    .movie-header h4{
+        font-size: 20px;
+    }
+    .bottom-header-inline{
+        padding-right: 0;
+        flex-direction: column;
+        padding-bottom: 1rem;
+    }
+    .header-inline-1{
+        width: 90%;
+    }
+    .header-inline-2{
+        width: 70%;
+    }
+    .top-header-div-2{
+        width: 50%;
+    }
+    .movie{
+        width: 95%;
+    }
+    .movies-sort-block{
+        margin: 0.5rem 5%;
+    }
+    .movie-left-parent{
+        margin-right: 0.8rem;
+    }
+}
+@media screen and (max-width: 450px){
+    .movie-header h4 {
+        font-size: 18px;
+        margin: 0;
+    }
+    .movie-right{
+        width: 60%;
+    }
+    .card{
+        width: 300px;
+        height: 500px;
+    }
+    .card-image img{
+        width: 300px;
+        height: 300px;
+    }
+    .card-image{
+        width: 300px;
+        height: 300px;
+    }
+}
+@media screen and (max-width: 425px){
+    .movie-right ul li{
+        font-size: 14px;
+    }
+}
